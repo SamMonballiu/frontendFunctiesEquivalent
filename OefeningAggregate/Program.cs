@@ -66,11 +66,14 @@ namespace OefeningAggregate
             return employees.Where(x => x.Salary > 3000).Select(y => y.Name);
         }
 
-        public static int AverageSalaryNonFreelancer()
+        public static double AverageSalaryNonFreelancer()
         {
-            var internen = employees.Where(x => !x.Freelancer);
-            var totalSalaris = internen.Sum(x => x.Salary);
-            return totalSalaris / internen.Count();
+            //var internen = employees.Where(x => !x.Freelancer);
+            //var totalSalaris = internen.Sum(x => x.Salary);
+            ////return totalSalaris / internen.Count();
+            ///
+            return employees.Where(x => !x.Freelancer)
+                            .Average(x => x.Salary);
         }
 
         public static string GetLongestName() => employees.OrderByDescending(x => x.Name.Length).FirstOrDefault().Name;
