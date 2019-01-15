@@ -10,7 +10,6 @@ namespace OefeningAggregate
     class Program
     {
         //analoog met https://github.com/SamMonballiu/frontendexercises/blob/master/basis/enterprise.js
-        //bestPaidFreelancer
 
         static List<Employee> employees = new List<Employee>();
 
@@ -27,14 +26,20 @@ namespace OefeningAggregate
                 new Employee("Anne", 2600,true)
             };
 
-            Console.WriteLine(GetBestPaidFreelancer().Name);
+            Console.WriteLine("Best paid freelancer: " + GetBestPaidFreelancer().Name);
 
+            Console.WriteLine("\nEarning more than 3K: ");
             foreach (var name in EarnsMoreThan3k())
             {
                 Console.WriteLine(name);
             }
 
-            Console.WriteLine(AverageSalaryNonFreelancer());
+            Console.WriteLine("\nAverage salary: " + AverageSalaryNonFreelancer());
+
+            Console.WriteLine("\nLongest name: " +  GetLongestName());
+
+            Console.WriteLine("\nSorted names:");
+            employees.OrderBy(x => x.Name).ToList().ForEach(x => Console.WriteLine(x.Name));
 
             Console.ReadKey();
         }
@@ -67,5 +72,9 @@ namespace OefeningAggregate
             var totalSalaris = internen.Sum(x => x.Salary);
             return totalSalaris / internen.Count();
         }
+
+        public static string GetLongestName() => employees.OrderByDescending(x => x.Name.Length).FirstOrDefault().Name;
+
+
     }
 }
